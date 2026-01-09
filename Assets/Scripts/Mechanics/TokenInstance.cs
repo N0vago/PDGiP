@@ -1,4 +1,5 @@
 using Platformer.Gameplay;
+using RoamingSave;
 using UnityEngine;
 using static Platformer.Core.Simulation;
 
@@ -18,6 +19,7 @@ namespace Platformer.Mechanics
         public bool randomAnimationStartTime = false;
         [Tooltip("List of frames that make up the animation.")]
         public Sprite[] idleAnimation, collectedAnimation;
+        public RoamingSaveManager roamingSaveManager;
 
         internal Sprite[] sprites = new Sprite[0];
 
@@ -48,6 +50,7 @@ namespace Platformer.Mechanics
         void OnPlayerEnter(PlayerController player)
         {
             if (collected) return;
+            roamingSaveManager.AddPoints(10);
             //disable the gameObject and remove it from the controller update list.
             frame = 0;
             sprites = collectedAnimation;

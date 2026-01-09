@@ -1,4 +1,5 @@
 using Platformer.Gameplay;
+using RoamingSave;
 using UnityEngine;
 using static Platformer.Core.Simulation;
 
@@ -9,6 +10,7 @@ namespace Platformer.Mechanics
     /// </summary>
     public class VictoryZone : MonoBehaviour
     {
+        public RoamingSaveManager roamingSaveManager;
         void OnTriggerEnter2D(Collider2D collider)
         {
             var p = collider.gameObject.GetComponent<PlayerController>();
@@ -16,6 +18,7 @@ namespace Platformer.Mechanics
             {
                 var ev = Schedule<PlayerEnteredVictoryZone>();
                 ev.victoryZone = this;
+                roamingSaveManager.SyncUpload();
             }
         }
     }
