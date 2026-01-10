@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Input;
 using UnityEngine;
 using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using Unity.VisualScripting;
 
 namespace Platformer.Mechanics
 {
@@ -42,6 +44,7 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+        private IPlayerInput _input;
         void Awake()
         {
             health = GetComponent<Health>();
@@ -49,16 +52,32 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            if(Application.isMobilePlatform)
+                InputModeManager.Instance.SetMode(InputMode.MobileUI);
+            else
+                InputModeManager.Instance.SetMode(InputMode.Keyboard);
+            
         }
 
         protected override void Update()
         {
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                _input = InputModeManager.Instance != null
+                    ? InputModeManager.Instance.GetActiveInput()
+                    : new KeyboardPlayerInput(); // fallback, если менеджер не в сцене
+
+                move.x = _input.GetHorizontal();
+
+                if (jumpState == JumpState.Grounded && _input.GetJumpDown())
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                else if (_input.GetJumpUp())
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
@@ -68,6 +87,7 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             base.Update();
         }

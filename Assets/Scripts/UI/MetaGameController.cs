@@ -1,6 +1,7 @@
 using Platformer.Mechanics;
 using Platformer.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Platformer.UI
 {
@@ -14,6 +15,8 @@ namespace Platformer.UI
         /// The main UI object which used for the menu.
         /// </summary>
         public MainUIController mainMenu;
+        
+        public Button openMainMenu;
 
         /// <summary>
         /// A list of canvas objects which are used during gameplay (when the main ui is turned off)
@@ -30,6 +33,12 @@ namespace Platformer.UI
         void OnEnable()
         {
             _ToggleMainMenu(showMainCanvas);
+            openMainMenu.onClick.AddListener(() => _ToggleMainMenu(show: !showMainCanvas));
+        }
+
+        void OnDisable()
+        {
+            openMainMenu.onClick.RemoveAllListeners();
         }
 
         /// <summary>
@@ -63,7 +72,7 @@ namespace Platformer.UI
 
         void Update()
         {
-            if (Input.GetButtonDown("Menu"))
+            if (UnityEngine.Input.GetButtonDown("Menu"))
             {
                 ToggleMainMenu(show: !showMainCanvas);
             }

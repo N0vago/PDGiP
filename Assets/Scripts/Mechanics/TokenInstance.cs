@@ -1,3 +1,4 @@
+using Ads;
 using Platformer.Gameplay;
 using UnityEngine;
 using static Platformer.Core.Simulation;
@@ -57,6 +58,11 @@ namespace Platformer.Mechanics
             var ev = Schedule<PlayerTokenCollision>();
             ev.token = this;
             ev.player = player;
+            var wallet = FindFirstObjectByType<CoinWallet>();
+            if (wallet != null)
+                wallet.Add(1);
+
+            Debug.Log($"[Rewarded] Granted coins: {1}");
         }
     }
 }
