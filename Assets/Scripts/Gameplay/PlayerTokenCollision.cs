@@ -1,6 +1,7 @@
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using Security;
 using UnityEngine;
 
 namespace Platformer.Gameplay
@@ -18,6 +19,7 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
+            AntiCheatMonitor.Instance.AddCoins(1);
             AudioSource.PlayClipAtPoint(token.tokenCollectAudio, token.transform.position);
         }
     }
