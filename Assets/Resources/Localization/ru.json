@@ -1,0 +1,10 @@
+﻿{
+  "language": "ru",
+  "entries": [
+    { "key": "ui.title", "value": "Платформер Microgame" },
+    { "key": "ui.main", "value": "Главное меню" },
+    { "key": "ui.settings", "value": "Настройки" },
+    { "key": "ui.controls", "value": "Управление" },
+    { "key": "ui.credits", "value": "Авторы" }
+  ]
+}

@@ -1,0 +1,10 @@
+﻿{
+  "language": "pl",
+  "entries": [
+    { "key": "ui.title", "value": "Platformówka Microgame" },
+    { "key": "ui.main", "value": "Menu główne" },
+    { "key": "ui.settings", "value": "Ustawienia" },
+    { "key": "ui.controls", "value": "Sterowanie" },
+    { "key": "ui.credits", "value": "Autorzy" }
+  ]
+}

@@ -1,0 +1,10 @@
+﻿{
+  "language": "en",
+  "entries": [
+    { "key": "ui.title", "value": "Platformer Microgame" },
+    { "key": "ui.main", "value": "Main" },
+    { "key": "ui.settings", "value": "Settings" },
+    { "key": "ui.controls", "value": "Controls" },
+    { "key": "ui.credits", "value": "Credits" }
+  ]
+}
