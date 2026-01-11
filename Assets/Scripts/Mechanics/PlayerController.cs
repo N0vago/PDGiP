@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Input;
+using MobileInputs;
 using UnityEngine;
 using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
@@ -58,11 +58,7 @@ namespace Platformer.Mechanics
         protected override void Start()
         {
             base.Start();
-            if(Application.isMobilePlatform)
-                InputModeManager.Instance.SetMode(InputMode.MobileUI);
-            else
-                InputModeManager.Instance.SetMode(InputMode.Keyboard);
-            
+            InputModeManager.Instance.SetMode(Application.isMobilePlatform ? InputMode.MobileUI : InputMode.Keyboard);
         }
 
         protected override void Update()
@@ -71,7 +67,7 @@ namespace Platformer.Mechanics
             {
                 _input = InputModeManager.Instance != null
                     ? InputModeManager.Instance.GetActiveInput()
-                    : new KeyboardPlayerInput(); // fallback, если менеджер не в сцене
+                    : new KeyboardPlayerInput();
 
                 move.x = _input.GetHorizontal();
 
